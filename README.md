@@ -31,9 +31,9 @@
 
 **Currency Exchange** is a network desktop application that simulates a currency exchange office. It is built using a **WCF (Windows Communication Foundation)** backend service and a **WPF (Windows Presentation Foundation)** desktop client.
 
-The service connects in real time to the **Polish National Bank (NBP) public API** to fetch up-to-date exchange rates for all major currencies. Users can register accounts, deposit PLN funds, buy and sell foreign currencies, and review their full transaction history and historical rate charts — all through a modern dark-themed desktop interface.
+The service connects in real time to the **Polish National Bank (NBP) public API** to fetch up to date exchange rates for all major currencies. Users can register accounts, deposit PLN funds, buy and sell foreign currencies, and review their full transaction history and historical rate charts all through a modern dark themed desktop interface.
 
-This project demonstrates a full client–server architecture using SOAP-based WCF communication over HTTP, following the Network Application Development course requirements.
+This project demonstrates a full client server architecture using SOAP-based WCF communication over HTTP, following the Network Application Development course requirements.
 
 \---
 
@@ -76,10 +76,10 @@ This project demonstrates a full client–server architecture using SOAP-based W
 
 **Communication flow:**
 
-1. The WCF Service is hosted locally via IIS Express (port is auto-assigned by Visual Studio)
+1. The WCF Service is hosted locally via IIS Express (port is auto assigned by Visual Studio)
 2. Clients connect using `BasicHttpBinding` (SOAP over HTTP)
 3. The service fetches live exchange rate data from the NBP REST API
-4. All user data (accounts, balances, transactions) is stored in-memory during the service session
+4. All user data (accounts, balances, transactions) is stored in memory during the service session
 
 \---
 
@@ -93,8 +93,8 @@ CurrencyExchange/
 │   ├── CurrencyService.svc                # Service entry point declaration
 │   ├── CurrencyService.svc.cs             # Full service implementation
 │   ├── Web.config                         # Service configuration (IIS, WCF bindings)
-│   ├── Web.Debug.config                   # Debug-specific config transforms
-│   ├── Web.Release.config                 # Release-specific config transforms
+│   ├── Web.Debug.config                   # Debug specific config transforms
+│   ├── Web.Release.config                 # Release specific config transforms
 │   ├── packages.config                    # NuGet dependencies (Newtonsoft.Json)
 │   └── Properties/
 │       └── AssemblyInfo.cs
@@ -105,7 +105,7 @@ CurrencyExchange/
 │   ├── App.xaml                           # WPF application entry
 │   ├── App.config                         # WCF endpoint configuration
 │   ├── Connected Services/
-│   │   └── CurrencyServiceRef/            # Auto-generated WCF proxy
+│   │   └── CurrencyServiceRef/            # Auto generated WCF proxy
 │   │       ├── Reference.cs               # Generated client proxy class
 │   │       ├── CurrencyService.wsdl       # WSDL contract
 │   │       └── Reference.svcmap           # Service map metadata
@@ -115,7 +115,7 @@ CurrencyExchange/
 │   ├── Program.cs                         # Basic test: HelloWorld + USD/EUR rates
 │   ├── App.config                         # WCF endpoint configuration
 │   └── Connected Services/
-│       └── CurrencyServiceRef/            # Auto-generated WCF proxy
+│       └── CurrencyServiceRef/            # Auto generated WCF proxy
 │
 ├── CurrencyExchange.slnx                  # Visual Studio solution file
 └── README.md                              # This file
@@ -131,7 +131,7 @@ CurrencyExchange/
 * **Login** with credentials, with validation feedback
 * **Password show/hide** toggle (👁 / 🙈) on the login screen
 * **Sign out** with a confirmation dialog
-* Session-based user state maintained while the app is running
+* Session based user state maintained while the app is running
 
 ### 📈 Live Exchange Rates
 
@@ -144,7 +144,7 @@ CurrencyExchange/
 
 * View current **PLN balance**
 * **Top up** PLN balance by entering any positive amount
-* Input validation with user-friendly error messages
+* Input validation with user friendly error messages
 
 ### 💰 Buy Currency
 
@@ -205,7 +205,7 @@ Before running this project, make sure you have the following installed:
 * **.NET Framework 4.7.2** (included with Visual Studio)
 * **Internet connection** — required to fetch live rates from `api.nbp.pl`
 
-> ℹ️ No database installation is required. All data is stored in-memory.
+> ℹ️ No database installation is required. All data is stored in memory.
 
 \---
 
