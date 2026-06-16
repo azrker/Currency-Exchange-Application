@@ -1,0 +1,458 @@
+﻿<Window x:Class="CurrencyExchange.WpfClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Currency Exchange Office" Height="750" Width="1100"
+        Background="#0F0F1A" FontFamily="Segoe UI" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="PrimaryBtn">
+            <Setter Property="Background" Value="#6C63FF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="18,10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#857DFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#5046CC"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="SideBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#A0A0C0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1E1E3A"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="DangerBtn">
+            <Setter Property="Background" Value="#3A1A1A"/>
+            <Setter Property="Foreground" Value="#FF6B6B"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#5A2020"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="InputBox">
+            <Setter Property="Background" Value="#1A1A2E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#2E2E4E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CaretBrush" Value="White"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="Label">
+            <Setter Property="Foreground" Value="#6C6C9A"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <Style TargetType="DataGrid" x:Key="StyledGrid">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#D0D0F0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#1E1E3A"/>
+            <Setter Property="RowBackground" Value="Transparent"/>
+            <Setter Property="AlternatingRowBackground" Value="#0A0A18"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#0A0A18"/>
+                        <Setter Property="Foreground" Value="#6C6C9A"/>
+                        <Setter Property="Padding" Value="12,10"/>
+                        <Setter Property="FontSize" Value="11"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#0A0A18">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Logo -->
+                <StackPanel Grid.Row="0" Margin="20,28,20,20">
+                    <Border Background="#1A1A3A" CornerRadius="12" Width="48" Height="48"
+                            HorizontalAlignment="Left" Margin="0,0,0,12">
+                        <TextBlock Text="💱" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="ExchangePro" Foreground="White"
+                               FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="Currency Exchange Office" Foreground="#3A3A6A"
+                               FontSize="11" Margin="0,2,0,0"/>
+                </StackPanel>
+
+                <!-- Nav -->
+                <StackPanel Grid.Row="1" Margin="12,0">
+                    <TextBlock Text="MENU" Foreground="#3A3A6A" FontSize="10"
+                               FontWeight="Bold" Margin="14,0,0,8"/>
+                    <Button x:Name="BtnRates" Content="📊   Exchange Rates"
+                            Style="{StaticResource SideBtn}" Margin="0,2" Click="ShowRates_Click"/>
+                    <Button x:Name="BtnAccount" Content="💰   My Account"
+                            Style="{StaticResource SideBtn}" Margin="0,2" Click="ShowAccount_Click"/>
+                    <Button x:Name="BtnBuy" Content="🔄   Buy Currency"
+                            Style="{StaticResource SideBtn}" Margin="0,2" Click="ShowBuy_Click"/>
+                    <Button x:Name="BtnSell" Content="📈   Sell Currency"
+                            Style="{StaticResource SideBtn}" Margin="0,2" Click="ShowSell_Click"/>
+                    <Button x:Name="BtnTx" Content="📋   Transactions"
+                            Style="{StaticResource SideBtn}" Margin="0,2" Click="ShowTransactions_Click"/>
+                    <Button x:Name="BtnHistory" Content="📉   Rate History"
+                            Style="{StaticResource SideBtn}" Margin="0,2" Click="ShowHistory_Click"/>
+                </StackPanel>
+
+                <!-- User info + signout -->
+                <Border Grid.Row="2" Background="#0D0D20" CornerRadius="10" Margin="12,0,12,16" Padding="12">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <Border Background="#1A1A3A" CornerRadius="16" Width="32" Height="32" Margin="0,0,8,0">
+                                <TextBlock Text="👤" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="UserText" Text="Not logged in"
+                                           Foreground="White" FontSize="12" FontWeight="SemiBold"/>
+                                <TextBlock x:Name="StatusText" Text="● Online"
+                                           Foreground="#22C55E" FontSize="10"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button x:Name="BtnSignOut" Content="🚪   Sign Out"
+                                Style="{StaticResource DangerBtn}"
+                                Visibility="Collapsed"
+                                Click="SignOut_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1" Background="#0F0F1A">
+
+            <!-- Login Panel -->
+            <Grid x:Name="LoginPanel" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="420"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+
+                    <TextBlock Text="Welcome Back 👋" Foreground="White"
+                               FontSize="30" FontWeight="Bold" Margin="0,0,0,6"/>
+                    <TextBlock Text="Sign in to manage your currency portfolio"
+                               Foreground="#4A4A7A" FontSize="13" Margin="0,0,0,32"/>
+
+                    <!-- Username -->
+                    <TextBlock Text="USERNAME" Style="{StaticResource Label}"/>
+                    <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                            BorderThickness="1" Margin="0,0,0,16">
+                        <TextBox x:Name="LoginUsername" Background="Transparent"
+                                 Foreground="White" BorderThickness="0"
+                                 Padding="12,10" FontSize="13" CaretBrush="White"/>
+                    </Border>
+
+                    <!-- Password -->
+                    <TextBlock Text="PASSWORD" Style="{StaticResource Label}"/>
+                    <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                            BorderThickness="1" Margin="0,0,0,6">
+                        <Grid>
+                            <PasswordBox x:Name="LoginPassword" Background="Transparent"
+                                         Foreground="White" BorderThickness="0"
+                                         Padding="12,10" FontSize="13"
+                                         PasswordChanged="Password_Changed"/>
+                            <TextBox x:Name="LoginPasswordVisible" Background="Transparent"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="12,10" FontSize="13"
+                                     Visibility="Collapsed"
+                                     TextChanged="PasswordVisible_Changed"/>
+                            <Button x:Name="TogglePassword" Content="👁"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="#4A4A7A" FontSize="14"
+                                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                                    Margin="0,0,8,0" Cursor="Hand"
+                                    Click="TogglePassword_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <TextBlock x:Name="LoginMsg" Foreground="#FF6B6B"
+                               FontSize="12" Margin="0,0,0,20" TextWrapping="Wrap"/>
+
+                    <!-- Buttons -->
+                    <Button Content="Sign In" Style="{StaticResource PrimaryBtn}"
+                            HorizontalAlignment="Stretch" Margin="0,0,0,10"
+                            Click="Login_Click"/>
+
+                    <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                            BorderThickness="1">
+                        <Button Content="Create New Account" Background="Transparent"
+                                Foreground="#6C63FF" BorderThickness="0"
+                                Padding="18,10" FontSize="13" FontWeight="SemiBold"
+                                Cursor="Hand" HorizontalAlignment="Stretch"
+                                Click="Register_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Border>
+
+                </StackPanel>
+            </Grid>
+
+            <!-- Rates Panel -->
+            <StackPanel x:Name="RatesPanel" Visibility="Collapsed" Margin="32">
+                <TextBlock Text="📊 Live Exchange Rates" Foreground="White"
+                           FontSize="24" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBlock Text="Real-time rates from National Bank of Poland"
+                           Foreground="#4A4A7A" FontSize="12" Margin="0,0,0,20"/>
+                <Button Content="🔄  Refresh Rates" Style="{StaticResource PrimaryBtn}"
+                        Width="140" HorizontalAlignment="Left" Margin="0,0,0,16"
+                        Click="RefreshRates_Click"/>
+                <Border Background="#0A0A18" CornerRadius="10" Padding="0">
+                    <DataGrid x:Name="RatesGrid" Style="{StaticResource StyledGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="CODE" Binding="{Binding Code}" Width="90"/>
+                            <DataGridTextColumn Header="CURRENCY NAME" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="RATE (PLN)" Binding="{Binding Mid, StringFormat=F4}" Width="140"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </StackPanel>
+
+            <!-- Account Panel -->
+            <StackPanel x:Name="AccountPanel" Visibility="Collapsed" Margin="32">
+                <TextBlock Text="💰 My Account" Foreground="White"
+                           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                <Border Background="#0A0A18" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="PLN BALANCE" Foreground="#4A4A7A"
+                                   FontSize="11" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="PlnBalance" Text="0.00 PLN"
+                                   Foreground="White" FontSize="36" FontWeight="Bold"/>
+                        <TextBlock x:Name="AccountUser" Text=""
+                                   Foreground="#4A4A7A" FontSize="12" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="#0A0A18" CornerRadius="12" Padding="24">
+                    <StackPanel>
+                        <TextBlock Text="TOP UP ACCOUNT" Foreground="White"
+                                   FontSize="15" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                        <TextBlock Text="AMOUNT (PLN)" Style="{StaticResource Label}"/>
+                        <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                                BorderThickness="1" Margin="0,0,0,12">
+                            <TextBox x:Name="TopUpAmount" Background="Transparent"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="12,10" FontSize="13" CaretBrush="White"/>
+                        </Border>
+                        <Button Content="💳  Top Up" Style="{StaticResource PrimaryBtn}"
+                                Width="120" HorizontalAlignment="Left" Click="TopUp_Click"/>
+                        <TextBlock x:Name="AccountMsg" FontSize="12" Margin="0,12,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Buy Panel -->
+            <StackPanel x:Name="BuyPanel" Visibility="Collapsed" Margin="32" MaxWidth="480">
+                <TextBlock Text="🔄 Buy Currency" Foreground="White"
+                           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                <Border Background="#0A0A18" CornerRadius="12" Padding="24">
+                    <StackPanel>
+                        <TextBlock Text="CURRENCY CODE" Style="{StaticResource Label}"/>
+                        <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                                BorderThickness="1" Margin="0,0,0,4">
+                            <TextBox x:Name="BuyCurrencyCode" Background="Transparent"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="12,10" FontSize="13" CaretBrush="White"/>
+                        </Border>
+                        <TextBlock Text="e.g. USD, EUR, GBP, CHF" Foreground="#3A3A6A"
+                                   FontSize="11" Margin="0,0,0,16"/>
+                        <TextBlock Text="AMOUNT TO BUY" Style="{StaticResource Label}"/>
+                        <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                                BorderThickness="1" Margin="0,0,0,20">
+                            <TextBox x:Name="BuyAmount" Background="Transparent"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="12,10" FontSize="13" CaretBrush="White"/>
+                        </Border>
+                        <Button Content="✅  Buy Now" Style="{StaticResource PrimaryBtn}"
+                                Width="130" HorizontalAlignment="Left" Click="BuyCurrency_Click"/>
+                        <TextBlock x:Name="BuyMsg" FontSize="12" Margin="0,14,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Sell Panel -->
+            <StackPanel x:Name="SellPanel" Visibility="Collapsed" Margin="32" MaxWidth="480">
+                <TextBlock Text="📈 Sell Currency" Foreground="White"
+                           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                <Border Background="#0A0A18" CornerRadius="12" Padding="24">
+                    <StackPanel>
+                        <TextBlock Text="CURRENCY CODE" Style="{StaticResource Label}"/>
+                        <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                                BorderThickness="1" Margin="0,0,0,4">
+                            <TextBox x:Name="SellCurrencyCode" Background="Transparent"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="12,10" FontSize="13" CaretBrush="White"/>
+                        </Border>
+                        <TextBlock Text="e.g. USD, EUR, GBP, CHF" Foreground="#3A3A6A"
+                                   FontSize="11" Margin="0,0,0,16"/>
+                        <TextBlock Text="AMOUNT TO SELL" Style="{StaticResource Label}"/>
+                        <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E"
+                                BorderThickness="1" Margin="0,0,0,20">
+                            <TextBox x:Name="SellAmount" Background="Transparent"
+                                     Foreground="White" BorderThickness="0"
+                                     Padding="12,10" FontSize="13" CaretBrush="White"/>
+                        </Border>
+                        <Button Content="💵  Sell Now" Style="{StaticResource PrimaryBtn}"
+                                Width="130" HorizontalAlignment="Left" Click="SellCurrency_Click"/>
+                        <TextBlock x:Name="SellMsg" FontSize="12" Margin="0,14,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Transactions Panel -->
+            <StackPanel x:Name="TransactionsPanel" Visibility="Collapsed" Margin="32">
+                <TextBlock Text="📋 Transaction History" Foreground="White"
+                           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                <Border Background="#0A0A18" CornerRadius="10">
+                    <DataGrid x:Name="TxGrid" Style="{StaticResource StyledGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="DATE" Binding="{Binding Date}" Width="140"/>
+                            <DataGridTextColumn Header="TYPE" Binding="{Binding Type}" Width="70"/>
+                            <DataGridTextColumn Header="CURRENCY" Binding="{Binding Currency}" Width="100"/>
+                            <DataGridTextColumn Header="AMOUNT" Binding="{Binding Amount, StringFormat=F4}" Width="110"/>
+                            <DataGridTextColumn Header="RATE" Binding="{Binding Rate, StringFormat=F4}" Width="110"/>
+                            <DataGridTextColumn Header="PLN VALUE" Binding="{Binding PlnValue, StringFormat=F2}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </StackPanel>
+
+            <!-- History Panel -->
+            <StackPanel x:Name="HistoryPanel" Visibility="Collapsed" Margin="32">
+                <TextBlock Text="📉 Historical Rates" Foreground="White"
+                           FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                <Border Background="#0A0A18" CornerRadius="12" Padding="24" Margin="0,0,0,16">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,12,0">
+                                <TextBlock Text="CURRENCY CODE" Style="{StaticResource Label}"/>
+                                <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E" BorderThickness="1">
+                                    <TextBox x:Name="HistCurrency" Background="Transparent"
+                                             Foreground="White" BorderThickness="0"
+                                             Padding="12,10" FontSize="13" CaretBrush="White"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                                <TextBlock Text="START DATE" Style="{StaticResource Label}"/>
+                                <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E" BorderThickness="1">
+                                    <TextBox x:Name="HistStart" Background="Transparent"
+                                             Foreground="White" BorderThickness="0"
+                                             Padding="12,10" FontSize="13" Text="2024-01-01" CaretBrush="White"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="0,0,12,0">
+                                <TextBlock Text="END DATE" Style="{StaticResource Label}"/>
+                                <Border Background="#1A1A2E" CornerRadius="8" BorderBrush="#2E2E4E" BorderThickness="1">
+                                    <TextBox x:Name="HistEnd" Background="Transparent"
+                                             Foreground="White" BorderThickness="0"
+                                             Padding="12,10" FontSize="13" Text="2024-12-31" CaretBrush="White"/>
+                                </Border>
+                            </StackPanel>
+                            <Button Grid.Column="3" Content="Search" Style="{StaticResource PrimaryBtn}"
+                                    VerticalAlignment="Bottom" Click="GetHistory_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border Background="#0A0A18" CornerRadius="10">
+                    <DataGrid x:Name="HistGrid" Style="{StaticResource StyledGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="DATE" Binding="{Binding Date}" Width="*"/>
+                            <DataGridTextColumn Header="RATE (PLN)" Binding="{Binding Rate, StringFormat=F4}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>
