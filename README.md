@@ -22,8 +22,7 @@
 6. [Prerequisites](#-prerequisites)
 7. [How to Run](#-how-to-run)
 8. [How to Use the Application](#-how-to-use-the-application)
-9. [WCF Service API Reference](#-wcf-service-api-reference)
-10. [External API](#-external-api)
+9. [External API](#-external-api)
 
 
 
