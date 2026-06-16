@@ -170,14 +170,7 @@ CurrencyExchange/
 * Fetches historical mid rates from the NBP API for that date range
 * Displays results in a table with **Date** and **Rate** columns
 
-### 🖥️ Test Client (Console)
 
-* A lightweight console project that connects to the service and prints:
-
-  * Service health check (`HelloWorld`)
-  * Live USD and EUR exchange rates
-
-\---
 
 ## 🛠 Technologies Used
 
