@@ -24,10 +24,9 @@
 8. [How to Use the Application](#-how-to-use-the-application)
 9. [WCF Service API Reference](#-wcf-service-api-reference)
 10. [External API](#-external-api)
-11. [Known Limitations](#-known-limitations)
-12. [Troubleshooting](#-troubleshooting)
 
-\---
+
+
 
 ## 📌 Project Overview
 
